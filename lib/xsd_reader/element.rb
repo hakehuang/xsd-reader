@@ -1,4 +1,4 @@
-require 'xsd_reader/shared'
+require_relative 'shared'
 
 module XsdReader
   class Element

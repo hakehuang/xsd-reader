@@ -22,6 +22,10 @@ module XsdReader
       @imports ||= map_children("import")
     end
 
+    #def schema_namespace_prefix
+    #  @schema_namespace_prefix ||= [(self.node.namespaces||{}).detect {|ns| ns[1]=~/XMLSchema$/}.first.split(':')[1],nil].uniq.join(':')
+    #end
+
     def mappable_children(xml_name)
       result = super
       result += import_mappable_children(xml_name) if xml_name != 'import'

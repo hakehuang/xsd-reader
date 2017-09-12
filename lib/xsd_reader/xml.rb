@@ -1,6 +1,6 @@
 require 'nokogiri'
 # require 'open-uri'
-require 'xsd_reader/shared' # for default_logger
+require_relative 'shared' # for default_logger
 
 module XsdReader
 

@@ -13,7 +13,7 @@ module XsdReader
 
     def self.default_logger
       @default_logger ||= Logger.new(STDOUT).tap do |logr|
-        logr.level = Logger::WARN
+        logr.level = Logger::DEBUG
       end
     end
 
@@ -26,7 +26,7 @@ module XsdReader
     end
 
     def schema_namespace_prefix
-      @schema_namespace_prefix ||= [(self.node.namespaces||{}).detect {|ns| ns[1]=~/XMLSchema/}.first.split(':')[1],nil].uniq.join(':')
+      @schema_namespace_prefix ||= [(self.node.namespaces||{}).detect {|ns| ns[1]=~/XMLSchema$/}.first.split(':')[1],nil].uniq.join(':')
     end
 
     def nodes
@@ -121,7 +121,6 @@ module XsdReader
         "#{schema_namespace_prefix}import" => Import,
         "#{schema_namespace_prefix}simpleType" => SimpleType
       }
-
       return class_mapping[n.is_a?(Nokogiri::XML::Node) ? n.name : n]
     end
 
@@ -141,8 +140,8 @@ module XsdReader
     end
 
     def mappable_children(xml_name)
-#3      p prepend_namespace(xml_name )
-      node.search("./#{prepend_namespace xml_name}").to_a
+#      p prepend_namespace(xml_name )
+       node.search("./#{prepend_namespace xml_name}").to_a
     end
 
     def map_children(xml_name)
